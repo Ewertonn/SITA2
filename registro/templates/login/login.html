@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="{% static 'login/img/favicon.png' %}">
+
+
+
+  <title>Login</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'login/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="{% static 'login/css/bootstrap-theme.css' %}" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="{% static 'login/css/elegant-icons-style.css' %}" rel="stylesheet" />
+  <link href="{% static 'login/css/font-awesome.css' %}" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="{% static 'login/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'login/css/style-responsive.css' %}" rel="stylesheet" />
+
+</head>
+
+<body class="login-img3-body">
+
+  <div class="container">
+
+      <div class="right-bar d-flex align-items-center">
+          <nav class="d-flex align-items-center">
+            <div class="main-menu">
+              <a href="/home">Tela incial</a>
+             </div>
+          </nav>  
+      </div>
+
+    <!--<form class="login-form" action="localhost:8000/usuarioformulario" method="post">-->
+    <form class="login-form" action="/autenticacao" method="post">
+      {% csrf_token %}
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Nome" name="username">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" class="form-control" placeholder="senha" name="senha">
+        </div>
+          <button type="submit">Login</button>
+          <button><a href="/home"> Voltar</a></button>
+          <button><a href="/usuarioregistro"> Cadatre-se como usuario</a></button>
+          <button><a href="/motoristaregistro"> Cadatre-se como Motorista</a></button>
+      </div>
+    </form>
+  </div>
+
+
+</body>
+
+</html>

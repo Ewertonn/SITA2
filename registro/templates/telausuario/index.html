@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Usuario</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'telausuario/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="{% static 'telausuario/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'telausuario/vendor/devicons/css/devicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'telausuario/vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'telausuario/' %}css/resume.min.css" rel="stylesheet">
+
+  </head>
+
+	<body id="page-top">
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">
+				<span class="d-block d-lg-none">SITA </span>
+				<span class="d-none d-lg-block">
+					<img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
+				</span>
+			</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<button id="myBtn" class="w3-button w3-large">Minhas reservas</button>
+						<a href="/home3" class="w3-button w3-large">retornar ao Início</a>
+						<a href="/logout" class="w3-button w3-large">Logout</a>
+						<div id="myModal" class="modal">
+							<div class="modal-content">
+								<span class="close">&times;</span>
+
+								<table border="1" width="100%">
+								<tr><td>Nº de Reserva</td><td>Motorista</td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Data</td><td>Horario</td></tr>
+								{% for reserva in reservas%}
+									
+											<tr>
+											<td>{{reserva.Reserva_id}}</td>
+											{% for motorista in reserva.Reserva_motorista.all %}
+												<td>{{motorista.user}}</td>
+											{% endfor %}
+											{% for rota in reserva.Reserva_rota.all %}
+												<td>{{rota.Rota_pontopartida}}</td>
+												<td>{{rota.Rota_pontochegada}}</td>
+												<td>{{rota.Rota_data}}</td>
+												<td>{{rota.Rota_horario}}</td>
+											{% endfor %}
+											</tr>
+								{%endfor%}
+								</table>
+								
+								<button id="myBtn2" class="w3-button w3-large">Fazer Reserva</button> 	
+								<div id="myModal2" class="modal">
+									<div class="modal-content" style="width:20%;">
+
+											<form action="#" method="post">
+												{% csrf_token %}
+
+												<center>
+													<p style="margin:0px;">Motorista:</p>
+													{{form.Reserva_motorista}}
+													<p style="margin:0px;">Rota:</p>
+													{{ form.Reserva_rota }}
+													<p style="margin:0px;">Veiculo Utilizado:</p>
+													{{ form.Reserva_veiculo }}
+
+												</center>
+							
+												<input type="submit" value="Finalizar Reserva">
+											</form>
+
+										<span class="close2">&times;</span>
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+					</li>
+				</ul> 
+			</div>
+
+		</nav>
+
+
+
+
+		<div class="container-fluid p-0">
+			<section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+				<div class="my-auto">
+					<h1 class="mb-0"> {{ user.username }}
+					</h1>
+					</h1>
+					<div class="subheading mb-5"> {{ Usuários_contato }} 
+						<a href="mailto:name@email.com"> {{ user.email }}</a>
+					</div>
+					<p class="mb-5"><input type="text" name="Nome" size="40" placeholder="Descrição" /> </p>
+				</div>
+			</section>
+			<img src="{% static 'telausuario/img/test.png' %}"style="width:100px" float:right>
+		</div>
+		<script src="{% static 'telausuario/vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'telausuario/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'telausuario/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+		<script src="{% static 'telausuario/js/resume.min.js' %}"></script>
+		<script>
+			var modal = document.getElementById('myModal');
+			var btn = document.getElementById("myBtn");
+			var span = document.getElementsByClassName("close")[0];
+			var modal2 = document.getElementById("myModal2");
+			var btn2 = document.getElementById("myBtn2");
+			var span2 = document.getElementsByClassName("close2")[0];
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+			btn2.onclick = function() {
+				modal2.style.display = "block";
+			}
+			span2.onclick = function() {
+				modal2.style.display = "none";
+			}
+			window.onclick = function(event) {
+				if (event.target == modal2) {
+					modal2.style.display = "none";
+				}
+			}
+			
+		</script>
+
+	</body>
+
+</html>
