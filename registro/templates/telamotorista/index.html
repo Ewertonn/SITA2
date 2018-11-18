@@ -78,7 +78,7 @@
 														<button type="submit">Submit</button>
 													</form>
 												</div>
-										<button type="submit"><a href="/home"> Inicio </a></button>
+										
 												<div class="clear"></div>
 											
 
@@ -140,23 +140,25 @@
 							<div class="modal-content">
 								<span class="close">&times;</span>
 								<table border="1" width="100%">
-								<tr><td>Nº de Reserva</td><td>Cliente</td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Data</td><td>Horario</td></tr>
+								<tr><td>Nº de Reserva</td><td>Número do cliente</td><td>E-mail do cliente</td></td><td>Cliente</td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Data</td><td>Horario</td></tr>
 								{% for reserva in reservas%}
 									
-									{% for motorista in reserva.Reserva_motorista.all %}
-										{% if motorista.user|slugify == user.username|slugify %}
+									{% for rota in reserva.Reserva_rota.all %}
 											<tr>
 											<td>{{reserva.Reserva_id}}</td>
+											<td>{{reserva.Usuario.usuario.Usuario_contato}}</td>
+											<td>{{reserva.Usuario.usuario.user.email}}</td>
+											
 											<td>{{reserva.Usuario}}</td>
 										
-											{% for rota in reserva.Reserva_rota.all %}
+											
 												<td>{{rota.Rota_pontopartida}}</td>
 												<td>{{rota.Rota_pontochegada}}</td>
 												<td>{{rota.Rota_data}}</td>
 												<td>{{rota.Rota_horario}}</td>
-											{% endfor %}
+										
 											</tr>
-										{%endif%}
+										 
 									{%endfor%}
 								{%endfor%}
 								</table>
@@ -201,9 +203,7 @@
 												{{ form2.Veiculo_modelo }}
 												<p style="margin:0px;">Cor do Veiculo:</p>
 												{{ form2.Veiculo_cor }}
-												<p style="margin:0px;">Motorista:</p>
-												{{ form2.Veiculo_motorista }}
-
+												<p> </p>
 												<input type="submit" value="Criar Veiculo">
 											</form></center>
 
@@ -229,7 +229,7 @@
 				<div class="my-auto">
 					<h1 class="mb-0" >{{ user.username}}
 					</h1>
-					<div class="subheading mb-5">(84) 99121-8468 ·
+					<div class="subheading mb-5"> {{user.motorista.Motorista_contato}} ·
 						<a href="mailto:name@email.com"> {{ user.email }} </a>
 					</div>
 					<p class="mb-5"><input type="text" name="Nome" size="40" placeholder="Descrição" /> </p>

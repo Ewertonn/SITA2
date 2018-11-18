@@ -31,7 +31,7 @@ class motoristaformulario(forms.ModelForm):
 class reservaformulario(forms.ModelForm):
 	class Meta:
 		model = Reserva
-		fields = ['Reserva_motorista','Reserva_rota','Reserva_veiculo']
+		fields = ['Reserva_rota']
 
 class rotaformulario(forms.ModelForm):
 	class Meta:

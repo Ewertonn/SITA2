@@ -41,7 +41,7 @@ def usuarioregistro(request):
 @csrf_protect
 def telamotorista(request):
 	rotas = Rota.objects.filter(Motorista=request.user)
-	reservas = Reserva.objects.all()
+	reservas = Reserva.objects.filter(Reserva_rota__Motorista=request.user)
 	form_class2 = veiculoformulario
 	template_name = 'telamotorista/index.html'
 
@@ -82,6 +82,7 @@ def telamotorista(request):
 
 	else:
 		form = rotaformulario()
+		form.fields['Rota_veiculo'].queryset=Veiculo.objects.filter(Motorista=request.user)
 		form2 = veiculoformulario
 		rotas = Rota.objects.filter(Motorista=request.user)
 		return render(request, 'telamotorista/index.html', {'veiculos':veiculos, 'form3' : form, 'rotas' : rotas, 'reservas':reservas, 'form2':form2})
@@ -217,12 +218,8 @@ class reservaformulario(View):
 		if form.is_valid():
 			reserva = form.save(commit=False)
 			reserva.save()
-			reserva.Reserva_motorista.set(form.cleaned_data['Reserva_motorista'])
 			reserva.Reserva_rota.set(form.cleaned_data['Reserva_rota'])
-			reserva.Reserva_veiculo.set(form.cleaned_data['Reserva_veiculo'])
-			f = form.save(commit=False)
-			f.Usuario = request.user
-			f.save()
+			reserva.Usuario = request.user
 			reserva.save()
 
 			return redirect('/sita/telausuario')

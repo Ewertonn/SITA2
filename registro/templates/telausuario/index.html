@@ -48,15 +48,16 @@
 								<span class="close">&times;</span>
 
 								<table border="1" width="100%">
-								<tr><td>Nº de Reserva</td><td>Motorista</td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Data</td><td>Horario</td></tr>
+								<tr><td>Nº de Reserva</td><td>Motorista</td><td>Numero do motorista</td><td>Email do Motorista</td></td></td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Data</td><td>Horario</td></tr>
 								{% for reserva in reservas%}
-									
+											
+											
+											{% for rota in reserva.Reserva_rota.all %}
 											<tr>
 											<td>{{reserva.Reserva_id}}</td>
-											{% for motorista in reserva.Reserva_motorista.all %}
-												<td>{{motorista.user}}</td>
-											{% endfor %}
-											{% for rota in reserva.Reserva_rota.all %}
+												<td>{{rota.Motorista}}</td>
+												<th>{{rota.Motorista.motorista.Motorista_contato}}</th>
+												<th>{{rota.Motorista.motorista.user.email}}</th>
 												<td>{{rota.Rota_pontopartida}}</td>
 												<td>{{rota.Rota_pontochegada}}</td>
 												<td>{{rota.Rota_data}}</td>
@@ -74,14 +75,10 @@
 												{% csrf_token %}
 
 												<center>
-													<p style="margin:0px;">Motorista:</p>
-													{{form.Reserva_motorista}}
 													<p style="margin:0px;">Rota:</p>
 													{{ form.Reserva_rota }}
-													<p style="margin:0px;">Veiculo Utilizado:</p>
-													{{ form.Reserva_veiculo }}
-
 												</center>
+
 							
 												<input type="submit" value="Finalizar Reserva">
 											</form>
@@ -109,7 +106,7 @@
 					<h1 class="mb-0"> {{ user.username }}
 					</h1>
 					</h1>
-					<div class="subheading mb-5"> {{ Usuários_contato }} 
+					<div class="subheading mb-5"> {{user.usuario.Usuario_contato}} --
 						<a href="mailto:name@email.com"> {{ user.email }}</a>
 					</div>
 					<p class="mb-5"><input type="text" name="Nome" size="40" placeholder="Descrição" /> </p>

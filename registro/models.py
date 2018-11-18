@@ -14,8 +14,6 @@ class Motorista(models.Model):
 	Motorista_id = models.AutoField(primary_key=True)
 	Motorista_contato = models.CharField(max_length=15, null=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-
-	#Motorista=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	def __str__(self):
 		return self.user.first_name + " " + self.user.last_name
 
@@ -24,7 +22,6 @@ class Veiculo(models.Model):
 	Veiculo_placa = models.CharField(null=True,max_length=7)
 	Veiculo_modelo = models.CharField(max_length=50)
 	Veiculo_cor = models.CharField(null=True,max_length=20)
-
 	Motorista=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	Veiculo_rota = models.ManyToManyField('Rota',blank=True)
 
@@ -41,13 +38,11 @@ class Rota(models.Model):
 	Motorista=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	valor=models.FloatField(null=True)
 	def __str__(self):
-		return self.Rota_pontopartida + " - " + self.Rota_pontochegada
+		return self.Rota_pontopartida + " - " + self.Rota_pontochegada + " - " + self.Motorista.username + "- " + str(self.Rota_horario)
 	
 
 class Reserva(models.Model):
 	Reserva_id = models.AutoField(primary_key=True)
-	Reserva_motorista = models.ManyToManyField('Motorista')
-	Reserva_veiculo = models.ManyToManyField('Veiculo')
 	Reserva_rota = models.ManyToManyField('Rota')
 	Usuario=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
