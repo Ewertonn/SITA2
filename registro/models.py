@@ -32,6 +32,9 @@ class Rota(models.Model):
 	Rota_id = models.AutoField(primary_key=True)
 	Rota_pontopartida = models.CharField(max_length=100)
 	Rota_pontochegada = models.CharField(max_length=100)
+
+	Rota_localpartida = models.CharField(max_length=50)
+
 	Rota_horario = models.TimeField()
 	Rota_data = models.DateField(null=True)
 	Rota_veiculo = models.ManyToManyField('Veiculo', blank=True)

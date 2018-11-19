@@ -36,7 +36,7 @@ class reservaformulario(forms.ModelForm):
 class rotaformulario(forms.ModelForm):
 	class Meta:
 		model = Rota
-		fields = ['Rota_id','Rota_pontopartida','Rota_pontochegada', 'Rota_horario', 'Rota_data', 'Rota_veiculo', 'valor']	
+		fields = ['Rota_id','Rota_pontopartida','Rota_pontochegada', 'Rota_localpartida', 'Rota_horario', 'Rota_data', 'Rota_veiculo', 'valor']	
 
 class veiculoformulario(forms.ModelForm):
 	class Meta:

@@ -48,7 +48,7 @@
 								<span class="close">&times;</span>
 
 								<table border="1" width="100%">
-								<tr><td>Nº de Reserva</td><td>Motorista</td><td>Numero do motorista</td><td>Email do Motorista</td></td></td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Data</td><td>Horario</td></tr>
+								<tr><td>Nº de Reserva</td><td>Motorista</td><td>Numero do motorista</td><td>Email do Motorista</td></td></td><td>Ponto de Partida</td><td>Ponto de Chegada</td><td>Local de saída</td><td>Data</td><td>Horario</td></tr>
 								{% for reserva in reservas%}
 											
 											
@@ -60,6 +60,9 @@
 												<th>{{rota.Motorista.motorista.user.email}}</th>
 												<td>{{rota.Rota_pontopartida}}</td>
 												<td>{{rota.Rota_pontochegada}}</td>
+
+												<td>{{rota.Rota_localpartida}}</td>
+												
 												<td>{{rota.Rota_data}}</td>
 												<td>{{rota.Rota_horario}}</td>
 											{% endfor %}
