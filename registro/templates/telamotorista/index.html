@@ -33,11 +33,13 @@
 
 	<body id="page-top">
 		{% if messages %}
-		<ul class="messages">
-		    {% for message in messages %}
-		    <h3><li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></h3>
-		    {% endfor %}
-		</ul>
+		<div style="position: absolute;top: 2%;left: 20%;color: red;">
+			<ul class="messages">
+			    {% for message in messages %}
+			    {% if message.tags %} {% endif %} {{ message }}
+			    {% endfor %}
+			</ul>
+		</div>
 		{% endif %}
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
@@ -75,7 +77,20 @@
 												<div class="sub-main">	
 													<form action="#" method="post">
 														{% csrf_token %}
-														{{ form3.as_p }}
+														<p style="margin-bottom: 0px;">Partida:</p>
+														{{ form3.Rota_pontopartida }}
+														<p style="margin-bottom: 0px;">Chegada:</p>
+														{{ form3.Rota_pontochegada }}
+														<p style="margin-bottom: 0px;">Local Da Partida:</p>
+														{{ form3.Rota_localpartida }}
+														<p style="margin-bottom: 0px;">Horario Da Rota:</p>
+														{{ form3.Rota_horario }}
+														<p style="margin-bottom: 0px;">Data Da Rota:</p>
+														{{ form3.Rota_data }}
+														<p style="margin-bottom: 0px;">Veiculo Utilizado:</p>
+														{{ form3.Rota_veiculo }}
+														<p style="margin-bottom: 0px;">Valor Da Passagem:</p>
+														{{ form3.valor }}
 														<div class="row">
 															<div class="col-md-12">
 																

@@ -81,7 +81,7 @@ def telamotorista(request):
 			f.Motorista = request.user
 			f.save()
 			veiculo.save()
-			messages.sucess(request, 'Veiculo cadastrado com sucesso!')
+			messages.error(request, 'Veiculo cadastrado com sucesso!')
 			return redirect('/sita/telamotorista')
 			
 

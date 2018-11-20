@@ -40,8 +40,19 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				{% csrf_token %}
 				<div class="row">
 					<div class="col-md-12">
-						{{ form1.as_p }}
-						{{ form2.as_p }}
+						<p style="margin-bottom: 0px;">Username:</p>
+						{{ form1.username }}
+						<p style="margin-bottom: 0px;">Primeiro Nome:</p>
+						{{ form1.first_name }}
+						<p style="margin-bottom: 0px;">Ultimo Nome:</p>
+						{{ form1.last_name }}
+						<p style="margin-bottom: 0px;">Email:</p>
+						{{ form1.email }}
+						<p style="margin-bottom: 0px;">Contato:</p>
+						{{ form2.Motorista_contato }}
+						<p style="margin-bottom: 0px;">Senha:</p>
+						{{ form1.password }}
+
 					</div>
 				</div>
 				<input type="submit" value="Finalizar">
