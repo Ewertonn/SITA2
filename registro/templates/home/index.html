@@ -29,6 +29,9 @@
 		<link rel="stylesheet" href="{% static 'home/css/animate.css' %}">
 		<link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
 		<link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+
+		
+
 	</head>
 	<body>
 		<div id="top"></div>
@@ -61,6 +64,18 @@
 				<div class="row fullscreen justify-content-center align-items-center">
 					<div class="col-lg-8">
 						<div class="banner-content text-center">
+
+							{% if valor %}
+							<div id="id01" class="w3-modal">
+								<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px ">
+									<h2 class="sub-head">Usuário registrado com sucesso!</h2>
+									<div class="w3-bar w3-border-bottom">
+										<button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Fechar</button>
+									</div>
+								</div>
+							</div>
+							{% endif %}
+
 							<p class="text-uppercase text-white">Informações, autonomia, viagens</p>
 							<h1 class="text-uppercase text-white">SITA - Sistema de Informação de Transportes Alternativos</h1>
 						</div>
@@ -87,8 +102,6 @@
 							{% if rotas %}
 							<table class="table">
 								<thead>
-
-									<td> Motorista </td><td> Contato </td><td> Horário </td><td> Local-Saída </td><td> Valor </td><td> Data </td>
 									{% for rota in rotas %}
 
 									
@@ -96,7 +109,6 @@
 										<th>{{rota.Motorista}}</th>
 										<th>{{rota.Motorista.motorista.Motorista_contato}}</th>
 										<th>{{ rota.Rota_horario }} <i style="font-size:14px" class="fa"></i></th>
-										<th>{{ rota.Rota_localpartida }} <i style="font-size:14px" class="fa"></i></th>
 										<th>{{rota.valor}} <i style="font-size:14px" class="fa"></i></th>
 										<th>{{rota.Rota_data}} <i style="font-size:14px" class="fa"></i></th>
 										<th>

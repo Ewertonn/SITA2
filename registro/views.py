@@ -11,21 +11,29 @@ from .models import Usuario, Reserva, Rota, Motorista, Veiculo
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 import datetime
+from django.contrib import messages
+
+
+
+aux = False
 
 @csrf_protect
 def home(request):
+	global aux 
 	rotas=[]
 	date_format = '%d/%m/%Y'
+	valor = aux
+	aux = False
 	try:
 		origem = request.GET.get('o')
 		destino = request.GET.get('d')
 		data = datetime.datetime.strptime(request.GET.get('dt'), date_format)
 		rotas = Rota.objects.filter(Rota_pontopartida=origem, Rota_pontochegada=destino, Rota_data=data)
 		print(rotas)
-		return render(request, 'home/index.html', {'rotas':rotas})
+		return render(request, 'home/index.html', {'rotas':rotas, 'valor': valor})
 	except:
 		print(rotas)
-		return render(request, 'home/index.html', {'rotas':rotas})
+		return render(request, 'home/index.html', {'rotas':rotas, 'valor': valor})
 	
 
 def dologin(request):
@@ -73,12 +81,15 @@ def telamotorista(request):
 			f.Motorista = request.user
 			f.save()
 			veiculo.save()
+			messages.sucess(request, 'Veiculo cadastrado com sucesso!')
 			return redirect('/sita/telamotorista')
 			
 
 			return redirect('/sita/telamotorista')
 		else:
-			return HttpResponse('ok e')
+			messages.error(request, 'Corrija os dados')
+			
+			return redirect('telamotorista')
 
 	else:
 		form = rotaformulario()
@@ -86,7 +97,7 @@ def telamotorista(request):
 		form2 = veiculoformulario
 		rotas = Rota.objects.filter(Motorista=request.user)
 		return render(request, 'telamotorista/index.html', {'veiculos':veiculos, 'form3' : form, 'rotas' : rotas, 'reservas':reservas, 'form2':form2})
-
+			
 
 @login_required
 def telausuario(request):
@@ -148,6 +159,10 @@ class usuarioformulario(View):
 			u.save()
 			usuario.save()
 
+			global aux 
+			aux = True
+			return redirect('home')
+
 		return render(request, self.template_name, {'form1':form1, 'form2':form2})
 		
 class motoristaformulario(View):
@@ -177,6 +192,10 @@ class motoristaformulario(View):
 			u.groups.add(group)
 			u.save()
 			motorista.save()
+			
+			global aux 
+			aux = True
+			return redirect('home')
 					
 		return render(request, self.template_name, {'form1':form1, 'form2':form2})
 

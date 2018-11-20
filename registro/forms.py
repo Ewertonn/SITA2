@@ -4,9 +4,16 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 class UserModelForm(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super(UserModelForm, self).__init__(*args, **kwargs)
+		self.fields['email'].required = True
+		self.fields['first_name'].required = True
+		self.fields['last_name'].required = True
+
 	class Meta:
 		model = User
 		fields = ['first_name', 'last_name', 'username',  'password',  'email']
+		help_texts = {'username' : ''}
 
 	def save(self,commit=True):
 		user = super(UserModelForm,self).save(commit=False)

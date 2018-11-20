@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator, RegexValidator
 
 class Usuario(models.Model):
 	Usuario_id = models.AutoField(primary_key=True)
-	Usuario_contato = models.CharField(max_length=15, null=True)
+	Usuario_contato = models.CharField(max_length=15,validators=[
+			RegexValidator(r'^[0-9]*$', 'Apenas números.')
+		], null=True)
 	user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
 	#Usuario_reserva = models.ManyToManyField('Reserva')
 	
@@ -12,7 +15,9 @@ class Usuario(models.Model):
 
 class Motorista(models.Model):
 	Motorista_id = models.AutoField(primary_key=True)
-	Motorista_contato = models.CharField(max_length=15, null=True)
+	Motorista_contato = models.CharField(max_length=15,validators=[
+			RegexValidator(r'^[0-9]*$', 'Apenas números.')
+		], null=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 	def __str__(self):
 		return self.user.first_name + " " + self.user.last_name
