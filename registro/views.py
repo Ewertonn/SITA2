@@ -69,6 +69,7 @@ def telamotorista(request):
 			f = form.save(commit=False)
 			f.Motorista = request.user
 			f.save()
+			form.save()
 			return redirect('/sita/telamotorista')
 		
 		elif form2.is_valid():
