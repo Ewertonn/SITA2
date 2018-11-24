@@ -28,7 +28,7 @@ class Veiculo(models.Model):
 	Veiculo_modelo = models.CharField(max_length=50)
 	Veiculo_cor = models.CharField(null=True,max_length=20)
 	Motorista=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-	Veiculo_rota = models.ManyToManyField('Rota',blank=True)
+	
 
 	def __str__(self):
 		return self.Veiculo_placa
@@ -42,7 +42,7 @@ class Rota(models.Model):
 
 	Rota_horario = models.TimeField()
 	Rota_data = models.DateField(null=True)
-	Rota_veiculo = models.ManyToManyField('Veiculo', blank=True)
+	Rota_veiculo = models.ForeignKey('Veiculo', on_delete=models.CASCADE, null=True)
 	Motorista=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	valor=models.FloatField(null=True)
 	def __str__(self):

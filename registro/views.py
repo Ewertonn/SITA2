@@ -29,10 +29,8 @@ def home(request):
 		destino = request.GET.get('d')
 		data = datetime.datetime.strptime(request.GET.get('dt'), date_format)
 		rotas = Rota.objects.filter(Rota_pontopartida=origem, Rota_pontochegada=destino, Rota_data=data)
-		print(rotas)
 		return render(request, 'home/index.html', {'rotas':rotas, 'valor': valor})
 	except:
-		print(rotas)
 		return render(request, 'home/index.html', {'rotas':rotas, 'valor': valor})
 	
 
